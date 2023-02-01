@@ -4,7 +4,10 @@
   "description": "Back-end for RS-Network project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "prepare": "husky install",
+    "lint": "eslint ./server",
+    "pretty": "npx prettier --write server/"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.25.2",
+    "husky": "^8.0.0",
     "nodemon": "^2.0.20",
     "prettier": "2.8.3"
   }
