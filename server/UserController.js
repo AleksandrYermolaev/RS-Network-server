@@ -1,4 +1,4 @@
-import { users } from "./mock-data.js";
+import { users } from './mock-data.js';
 
 class UserController {
   getAll(req, res) {
@@ -8,10 +8,10 @@ class UserController {
   getUser(req, res) {
     const { id } = req.params;
     if (!id) {
-      res.status(400).json({ message: 'User ID param is required!' })
+      res.status(400).json({ message: 'User ID param is required!' });
     }
-    const [user] = users.filter((user) => user.id === Number(id));
-    res.json(user);
+    const [requestedUser] = users.filter((user) => user.id === Number(id));
+    res.json(requestedUser);
   }
 
   create(req, res) {
@@ -24,23 +24,23 @@ class UserController {
   update(req, res) {
     const { id } = req.params;
     if (!id) {
-      res.status(400).json({ message: 'User ID param is required!' })
+      res.status(400).json({ message: 'User ID param is required!' });
     }
-    const [user] = users.filter((user) => user.id === Number(id));
+    const [requestedUser] = users.filter((user) => user.id === Number(id));
     const updatedUser = req.body;
-    for (let key in updatedUser) {
-      user[key] = updatedUser[key];
+    for (const key in updatedUser) {
+      requestedUser[key] = updatedUser[key];
     }
-    res.json(user);
+    res.json(requestedUser);
   }
 
   delete(req, res) {
     const { id } = req.params;
     if (!id) {
-      res.status(400).json({ message: 'User ID param is required!' })
+      res.status(400).json({ message: 'User ID param is required!' });
     }
-    const [user] = users.filter((user) => user.id === Number(id));
-    const userIndex = users.indexOf(user);
+    const [requestedUser] = users.filter((user) => user.id === Number(id));
+    const userIndex = users.indexOf(requestedUser);
     users.splice(userIndex, 1);
     res.send(`user ${id} deleted`);
   }
