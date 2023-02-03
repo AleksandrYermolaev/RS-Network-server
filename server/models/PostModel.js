@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const PostModel = new Schema({
   userId: { type: String, required: true },
@@ -6,7 +6,7 @@ const PostModel = new Schema({
   description: { type: String },
   imageUrl: { type: String },
   likes: { type: [String] },
-  comments: { type: [String] }
+  comments: { type: [String] },
 });
 
 export default model('PostModel', PostModel);

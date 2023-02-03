@@ -6,7 +6,9 @@ class CommentController {
     try {
       const { id } = req.params;
       if (!id) {
-        res.status(400).json({ message: 'Comment ID is required param: /comment/:id' })
+        res
+          .status(400)
+          .json({ message: 'Comment ID is required param: /comment/:id' });
       }
       if (id.length !== 24) {
         res.status(400).json({ message: 'Wrong comment ID format!' });
@@ -35,13 +37,17 @@ class CommentController {
     try {
       const { id } = req.params;
       if (!id) {
-        res.status(400).json({ message: 'Comment ID is required param: /comment/:id' })
+        res
+          .status(400)
+          .json({ message: 'Comment ID is required param: /comment/:id' });
       }
       if (id.length !== 24) {
         res.status(400).json({ message: 'Wrong comment ID format!' });
       }
-      const comment = req.body
-      const updatedComment = await CommentModel.findByIdAndUpdate(id, comment, { new: true });
+      const comment = req.body;
+      const updatedComment = await CommentModel.findByIdAndUpdate(id, comment, {
+        new: true,
+      });
       res.json(updatedComment);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
@@ -52,14 +58,18 @@ class CommentController {
     try {
       const { id } = req.params;
       if (!id) {
-        res.status(400).json({ message: 'Comment ID is required param: /comment/:id' })
+        res
+          .status(400)
+          .json({ message: 'Comment ID is required param: /comment/:id' });
       }
       if (id.length !== 24) {
         res.status(400).json({ message: 'Wrong coment ID format!' });
       }
       const deletedComment = await CommentModel.findByIdAndDelete(id);
       const commentedPost = await PostModel.findById(deletedComment.postId);
-      const deletedCommentIndex = commentedPost.comments.indexOf(deletedComment.id);
+      const deletedCommentIndex = commentedPost.comments.indexOf(
+        deletedComment.id
+      );
       commentedPost.comments.splice(deletedCommentIndex, 1);
       await PostModel.findByIdAndUpdate(deletedComment.postId, commentedPost);
       res.json(deletedComment);
@@ -78,8 +88,8 @@ class CommentController {
         res.status(400).json({ message: 'Wrong post ID format!' });
       }
       const commentedPost = await PostModel.findById(postId);
-      const commentsPromises = commentedPost.comments.map(
-        async (commentId) => CommentModel.findById(commentId)
+      const commentsPromises = commentedPost.comments.map(async (commentId) =>
+        CommentModel.findById(commentId)
       );
       const comments = await Promise.all(commentsPromises);
       res.json(comments);

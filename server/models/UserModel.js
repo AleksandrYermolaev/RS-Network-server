@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const UserModel = new Schema({
   name: { type: String, required: true },
@@ -8,7 +8,7 @@ const UserModel = new Schema({
   location: { type: String },
   followers: { type: [String] },
   password: { type: String, required: true },
-  about: { type: String }
+  about: { type: String },
 });
 
 export default model('UserModel', UserModel);

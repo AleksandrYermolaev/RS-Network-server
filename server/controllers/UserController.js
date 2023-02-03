@@ -1,9 +1,9 @@
-import UserModel from '../models/UserModel.js';
+import UserService from '../services/UserService.js';
 
 class UserController {
   async getAll(req, res) {
     try {
-      const users = await UserModel.find();
+      const users = await UserService.getAll();
       res.json(users);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
@@ -12,14 +12,7 @@ class UserController {
 
   async getUser(req, res) {
     try {
-      const { id } = req.params;
-      if (!id) {
-        res.status(400).json({ message: 'User ID is required param: /users/:id' })
-      }
-      if (id.length !== 24) {
-        res.status(400).json({ message: 'Wrong user ID format!' });
-      }
-      const user = await UserModel.findById(id);
+      const user = await UserService.getUser(req.params.id);
       res.json(user);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
@@ -28,8 +21,7 @@ class UserController {
 
   async create(req, res) {
     try {
-      const user = req.body;
-      const createdUser = await UserModel.create({ ...user });
+      const createdUser = await UserService.create(req.body);
       res.status(201).json(createdUser);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
@@ -38,15 +30,7 @@ class UserController {
 
   async update(req, res) {
     try {
-      const { id } = req.params;
-      if (!id) {
-        res.status(400).json({ message: 'User ID is required param: /users/:id' })
-      }
-      if (id.length !== 24) {
-        res.status(400).json({ message: 'Wrong user ID format!' });
-      }
-      const user = req.body
-      const updatedUser = await UserModel.findByIdAndUpdate(id, user, { new: true });
+      const updatedUser = await UserService.update(req.params.id, req.body);
       res.json(updatedUser);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
@@ -55,14 +39,7 @@ class UserController {
 
   async delete(req, res) {
     try {
-      const { id } = req.params;
-      if (!id) {
-        res.status(400).json({ message: 'User ID is required param: /users/:id' })
-      }
-      if (id.length !== 24) {
-        res.status(400).json({ message: 'Wrong user ID format!' });
-      }
-      const deletedUser = await UserModel.findByIdAndDelete(id)
+      const deletedUser = await UserService.delete(req.params.id);
       res.json(deletedUser);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);

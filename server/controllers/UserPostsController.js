@@ -11,7 +11,7 @@ class UserPostsController {
         res.status(400).json({ message: 'Wrong user ID format!' });
       }
       const posts = await PostModel.find();
-      const userPosts = posts.filter((post) => post.userId === userId)
+      const userPosts = posts.filter((post) => post.userId === userId);
       res.json(userPosts);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
