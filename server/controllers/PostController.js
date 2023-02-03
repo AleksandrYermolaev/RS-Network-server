@@ -1,4 +1,4 @@
-import PostService from "../services/PostService.js";
+import PostService from '../services/PostService.js';
 
 class PostController {
   async getPost(req, res) {
@@ -30,7 +30,7 @@ class PostController {
 
   async delete(req, res) {
     try {
-      const deletedPost = await PostService.delete(req.params.id)
+      const deletedPost = await PostService.delete(req.params.id);
       res.json(deletedPost);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
