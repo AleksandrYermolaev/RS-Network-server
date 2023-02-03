@@ -1,18 +1,9 @@
-import PostModel from '../models/PostModel.js';
+import PostService from "../services/PostService.js";
 
 class PostController {
   async getPost(req, res) {
     try {
-      const { id } = req.params;
-      if (!id) {
-        res
-          .status(400)
-          .json({ message: 'Post ID is required param: /posts/:id' });
-      }
-      if (id.length !== 24) {
-        res.status(400).json({ message: 'Wrong post ID format!' });
-      }
-      const post = await PostModel.findById(id);
+      const post = await PostService.getPost(req.params.id);
       res.json(post);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
@@ -21,8 +12,7 @@ class PostController {
 
   async create(req, res) {
     try {
-      const post = req.body;
-      const createdPost = await PostModel.create({ ...post });
+      const createdPost = await PostService.create(req.body);
       res.status(201).json(createdPost);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
@@ -31,19 +21,7 @@ class PostController {
 
   async update(req, res) {
     try {
-      const { id } = req.params;
-      if (!id) {
-        res
-          .status(400)
-          .json({ message: 'Post ID is required param: /users/:id' });
-      }
-      if (id.length !== 24) {
-        res.status(400).json({ message: 'Wrong post ID format!' });
-      }
-      const post = req.body;
-      const updatedPost = await PostModel.findByIdAndUpdate(id, post, {
-        new: true,
-      });
+      const updatedPost = await PostService.update(req.params.id, req.body);
       res.json(updatedPost);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
@@ -52,16 +30,7 @@ class PostController {
 
   async delete(req, res) {
     try {
-      const { id } = req.params;
-      if (!id) {
-        res
-          .status(400)
-          .json({ message: 'Post ID is required param: /users/:id' });
-      }
-      if (id.length !== 24) {
-        res.status(400).json({ message: 'Wrong post ID format!' });
-      }
-      const deletedPost = await PostModel.findByIdAndDelete(id);
+      const deletedPost = await PostService.delete(req.params.id)
       res.json(deletedPost);
     } catch (err) {
       res.status(500).send(`${err.name}: ${err.message}`);
