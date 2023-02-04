@@ -5,10 +5,12 @@ import PostController from './controllers/PostController.js';
 import CommentController from './controllers/CommentController.js';
 import UserPostsController from './controllers/UserPostsController.js';
 import ThreadPostsController from './controllers/ThreadPostsController.js';
+import LoginController from './controllers/LoginController.js';
 
 dotenv.config();
 const router = new Router();
 const USER = process.env.USER_ENDPOINT;
+const LOGIN = process.env.LOGIN_ENDPOINT;
 const POST = process.env.POST_ENDPOINT;
 const COMMENT = process.env.COMMENT_ENDPOINT;
 const COMMENTS = process.env.COMMENTS_ENDPOINT;
@@ -20,6 +22,8 @@ router.get(`${USER}/:id`, UserController.getUser);
 router.post(USER, UserController.create);
 router.patch(`${USER}/:id`, UserController.update);
 router.delete(`${USER}/:id`, UserController.delete);
+
+router.post(LOGIN, LoginController.login);
 
 router.get(`${USER_POSTS}/:userId`, UserPostsController.getUserPosts);
 router.get(`${THREAD_POSTS}/:userId`, ThreadPostsController.getThreadPosts);
