@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import dotenv from 'dotenv';
-import UserController from './UserController.js';
-import PostController from './PostController.js';
-import CommentController from './CommentController.js';
-import UserPostsController from './UserPostsController.js';
-import ThreadPostsController from './ThreadPostsController.js';
+import UserController from './controllers/UserController.js';
+import PostController from './controllers/PostController.js';
+import CommentController from './controllers/CommentController.js';
+import UserPostsController from './controllers/UserPostsController.js';
+import ThreadPostsController from './controllers/ThreadPostsController.js';
 
 dotenv.config();
 const router = new Router();

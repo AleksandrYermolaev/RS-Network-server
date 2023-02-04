@@ -1,0 +1,50 @@
+import UserService from '../services/UserService.js';
+
+class UserController {
+  async getAll(req, res) {
+    try {
+      const users = await UserService.getAll();
+      res.json(users);
+    } catch (err) {
+      res.status(500).send(`${err.name}: ${err.message}`);
+    }
+  }
+
+  async getUser(req, res) {
+    try {
+      const user = await UserService.getUser(req.params.id);
+      res.json(user);
+    } catch (err) {
+      res.status(500).send(`${err.name}: ${err.message}`);
+    }
+  }
+
+  async create(req, res) {
+    try {
+      const createdUser = await UserService.create(req.body);
+      res.status(201).json(createdUser);
+    } catch (err) {
+      res.status(500).send(`${err.name}: ${err.message}`);
+    }
+  }
+
+  async update(req, res) {
+    try {
+      const updatedUser = await UserService.update(req.params.id, req.body);
+      res.json(updatedUser);
+    } catch (err) {
+      res.status(500).send(`${err.name}: ${err.message}`);
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const deletedUser = await UserService.delete(req.params.id);
+      res.json(deletedUser);
+    } catch (err) {
+      res.status(500).send(`${err.name}: ${err.message}`);
+    }
+  }
+}
+
+export default new UserController();
