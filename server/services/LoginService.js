@@ -24,6 +24,16 @@ class LoginService {
       user: loginCandidate,
     };
   }
+
+  async getPermission(id) {
+    const user = await UserModel.findById(id);
+    if (!user) {
+      throw new RequestError(403, 'Access is denied!');
+    }
+    return {
+      ok: true,
+    };
+  }
 }
 
 export default new LoginService();
