@@ -1,3 +1,4 @@
+import RequestError from '../helpers/requestError.js';
 import UserService from '../services/UserService.js';
 
 class UserController {
@@ -22,9 +23,14 @@ class UserController {
   async create(req, res) {
     try {
       const createdUser = await UserService.create(req.body);
-      res.status(201).json(createdUser);
+      return res.status(201).json(createdUser);
     } catch (err) {
-      res.status(500).send(`${err.name}: ${err.message}`);
+      if (err instanceof RequestError) {
+        return res
+          .status(err.status)
+          .json({ name: err.name, message: err.message });
+      }
+      return res.status(500).send(`${err.name}: ${err.message}`);
     }
   }
 

@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt';
+import RequestError from '../helpers/requestError.js';
 import UserModel from '../models/UserModel.js';
 
 class UserService {
@@ -18,7 +20,17 @@ class UserService {
   }
 
   async create(user) {
-    const createdUser = await UserModel.create({ ...user });
+    const { name, email, password } = user;
+    const isEmailTaken = await UserModel.findOne({ email });
+    if (isEmailTaken) {
+      throw new RequestError(400, 'Email is already taken!');
+    }
+    const hashedPassword = await bcrypt.hash(password, 8);
+    const createdUser = await UserModel.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
     return createdUser;
   }
 
