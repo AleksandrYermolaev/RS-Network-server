@@ -6,7 +6,8 @@ import CommentController from './controllers/CommentController.js';
 import UserPostsController from './controllers/UserPostsController.js';
 import ThreadPostsController from './controllers/ThreadPostsController.js';
 import LoginController from './controllers/LoginController.js';
-import validateToken from './controllers/middlewares/validateToken.js';
+import validateToken from './middlewares/validateToken.js';
+import FileController from './controllers/FileController.js';
 
 dotenv.config();
 const router = new Router();
@@ -14,6 +15,7 @@ const USER = process.env.USER_ENDPOINT;
 const LOGIN = process.env.LOGIN_ENDPOINT;
 const PERMISSION = process.env.PERMISSION_ENDPOINT;
 const POST = process.env.POST_ENDPOINT;
+const IMAGE_UPLOAD = process.env.IMAGE_UPLOAD_ENDPOINT;
 const COMMENT = process.env.COMMENT_ENDPOINT;
 const COMMENTS = process.env.COMMENTS_ENDPOINT;
 const USER_POSTS = process.env.USER_POSTS_ENDPOINT;
@@ -35,6 +37,7 @@ router.get(`${POST}/:id`, PostController.getPost);
 router.post(POST, PostController.create);
 router.patch(`${POST}/:id`, PostController.update);
 router.delete(`${POST}/:id`, PostController.delete);
+router.post(IMAGE_UPLOAD, FileController.upload);
 
 router.get(`${COMMENT}/:id`, CommentController.getComment);
 router.post(COMMENT, CommentController.create);
