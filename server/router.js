@@ -8,6 +8,7 @@ import ThreadPostsController from './controllers/ThreadPostsController.js';
 import LoginController from './controllers/LoginController.js';
 import validateToken from './middlewares/validateToken.js';
 import FileController from './controllers/FileController.js';
+import LikesController from './controllers/LikesController.js';
 
 dotenv.config();
 const router = new Router();
@@ -20,6 +21,7 @@ const COMMENT = process.env.COMMENT_ENDPOINT;
 const COMMENTS = process.env.COMMENTS_ENDPOINT;
 const USER_POSTS = process.env.USER_POSTS_ENDPOINT;
 const THREAD_POSTS = process.env.THREAD_POSTS_ENDPOINT;
+const LIKES = process.env.LIKE_ENDPOINT;
 
 router.get(USER, UserController.getAll);
 router.get(`${USER}/:id`, UserController.getUser);
@@ -38,6 +40,8 @@ router.post(POST, PostController.create);
 router.patch(`${POST}/:id`, PostController.update);
 router.delete(`${POST}/:id`, PostController.delete);
 router.post(IMAGE_UPLOAD, FileController.upload);
+
+router.post(`${LIKES}/:postId`, LikesController.likeOrUnlike);
 
 router.get(`${COMMENT}/:id`, CommentController.getComment);
 router.post(COMMENT, CommentController.create);
