@@ -10,12 +10,10 @@ const validateToken = (req, res, next) => {
     req.user = decodedToken;
     next();
   } catch (err) {
-    res
-      .status(401)
-      .json({
-        name: 'Access error',
-        message: 'You must be log in before access this page!',
-      });
+    res.status(401).json({
+      name: 'Access error',
+      message: 'You must be log in before access this page!',
+    });
   }
 };
 
