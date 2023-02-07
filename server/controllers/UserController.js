@@ -26,9 +26,7 @@ class UserController {
       return res.status(201).json(createdUser);
     } catch (err) {
       if (err instanceof RequestError) {
-        return res
-          .status(err.status)
-          .json({ name: err.name, message: err.message });
+        return res.status(err.status).send(`${err.message}`);
       }
       return res.status(500).send(`${err.name}: ${err.message}`);
     }
