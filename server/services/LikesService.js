@@ -20,7 +20,7 @@ class LikesService {
     if (userIndex === -1) {
       post.likes.push(userId);
     } else {
-      post.likes.splice(userId, 1);
+      post.likes.splice(userIndex, 1);
     }
     await PostModel.findByIdAndUpdate(postId, post);
     return post.likes;
