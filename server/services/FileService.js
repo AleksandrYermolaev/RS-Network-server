@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
+import RequestError from '../helpers/requestError';
 
 class FileService {
   async upload(file) {
@@ -10,7 +11,7 @@ class FileService {
       await file.mv(filePath);
       return `${process.env.SERVER}/${fileName}`;
     } catch (error) {
-      throw new ReferenceError(400, 'bad request');
+      throw new RequestError(400, 'bad request');
     }
   }
 }
