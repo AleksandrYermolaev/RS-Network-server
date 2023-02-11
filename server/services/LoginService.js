@@ -31,7 +31,7 @@ class LoginService {
       throw new RequestError(403, 'Access is denied!');
     }
     return {
-      user
+      user,
     };
   }
 }

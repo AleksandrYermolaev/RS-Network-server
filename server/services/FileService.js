@@ -3,6 +3,7 @@ import path from 'path';
 
 class FileService {
   async upload(file) {
+    console.log(file);
     const fileExt = file.name.split('.').at(-1);
     const fileName = `${uuidv4()}.${fileExt}`;
     const filePath = path.resolve('static', fileName);
