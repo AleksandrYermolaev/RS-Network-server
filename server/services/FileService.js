@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
-import RequestError from '../helpers/requestError';
+import RequestError from '../helpers/requestError.js';
 
 class FileService {
   async upload(file) {

@@ -44,6 +44,7 @@ class UserService {
       name,
       email,
       password: hashedPassword,
+      followers: ['63e90bdc2c47e03ec8c03233'],
     });
     return createdUser;
   }
