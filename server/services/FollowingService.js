@@ -10,7 +10,9 @@ class FollowingService {
       throw new RequestError(400, 'Wrong user ID format!');
     }
     const allUsers = await UserModel.find();
-    const followings = allUsers.filter((user) => user.followers.includes(userId));
+    const followings = allUsers.filter((user) =>
+      user.followers.includes(userId)
+    );
     return followings;
   }
 }
