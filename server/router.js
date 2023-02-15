@@ -9,6 +9,7 @@ import LoginController from './controllers/LoginController.js';
 import validateToken from './middlewares/validateToken.js';
 import FileController from './controllers/FileController.js';
 import LikesController from './controllers/LikesController.js';
+import FollowingController from './controllers/FollowingController.js';
 
 dotenv.config();
 const router = new Router();
@@ -22,6 +23,7 @@ const COMMENTS = process.env.COMMENTS_ENDPOINT;
 const USER_POSTS = process.env.USER_POSTS_ENDPOINT;
 const THREAD_POSTS = process.env.THREAD_POSTS_ENDPOINT;
 const LIKES = process.env.LIKE_ENDPOINT;
+const FOLLOWING = process.env.FOLLOWING_ENDPOINT;
 
 router.get(USER, UserController.getAll);
 router.get(`${USER}/:id`, UserController.getUser);
@@ -48,5 +50,7 @@ router.post(COMMENT, CommentController.create);
 router.patch(`${COMMENT}/:id`, CommentController.update);
 router.delete(`${COMMENT}/:id`, CommentController.delete);
 router.get(`${COMMENTS}/:postId`, CommentController.getPostComments);
+
+router.get(`${FOLLOWING}/:userId`, FollowingController.getFollowings);
 
 export default router;
