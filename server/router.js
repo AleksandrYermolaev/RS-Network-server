@@ -11,6 +11,7 @@ import FileController from './controllers/FileController.js';
 import LikesController from './controllers/LikesController.js';
 import FollowingController from './controllers/FollowingController.js';
 import DialogsController from './controllers/DialogsController.js';
+import MessageController from './controllers/MessageController.js';
 
 dotenv.config();
 const router = new Router();
@@ -58,5 +59,8 @@ router.get(`${FOLLOWING}/:userId`, FollowingController.getFollowings);
 
 router.post(DIALOGS, DialogsController.createDialog);
 router.get(`${DIALOGS}/:userId`, DialogsController.getUserDialogs);
+
+router.post(MESSAGES, MessageController.createMessage);
+router.get(`${MESSAGES}/:dialogId`, MessageController.getMessages);
 
 export default router;
