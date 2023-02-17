@@ -31,6 +31,7 @@ app.use(fileUpload());
 app.use(router);
 
 webSocket.on('connection', (socket) => {
+  console.log('user connected', socket.id);
   socket.on('new-post', (message) => {
     socket.broadcast.emit('new-post', message);
   });
