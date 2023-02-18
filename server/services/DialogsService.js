@@ -27,6 +27,19 @@ class DialogService {
     });
     return dialogs;
   }
+
+  async getDialogById(dialogId) {
+    if (!dialogId) {
+      throw new RequestError(400, 'Dialog ID are required!');
+    }
+    if (dialogId.length !== 24) {
+      throw new RequestError(400, 'Wrong Dialog ID format!');
+    }
+    const dialog = await DialogModel.find({
+      _id: dialogId,
+    });
+    return dialog;
+  }
 }
 
 export default new DialogService();

@@ -32,6 +32,20 @@ class DialogsController {
       return res.status(500).send(`${err.name}: ${err.message}`);
     }
   }
+
+  async getDialogById(req, res) {
+    try {
+      const dialog = await DialogsService.getDialogById(req.params.dialogId);
+      return res.json(dialog);
+    } catch (err) {
+      if (err instanceof RequestError) {
+        return res
+          .status(err.status)
+          .json({ name: err.name, message: err.message });
+      }
+      return res.status(500).send(`${err.name}: ${err.message}`);
+    }
+  }
 }
 
 export default new DialogsController();
