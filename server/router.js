@@ -16,6 +16,7 @@ import MessageController from './controllers/MessageController.js';
 dotenv.config();
 const router = new Router();
 const USER = process.env.USER_ENDPOINT;
+const USER_REMOVE = process.env.USER_REMOVE_ENDPOINT;
 const LOGIN = process.env.LOGIN_ENDPOINT;
 const PERMISSION = process.env.PERMISSION_ENDPOINT;
 const POST = process.env.POST_ENDPOINT;
@@ -34,6 +35,7 @@ router.get(`${USER}/:id`, UserController.getUser);
 router.post(USER, UserController.create);
 router.patch(`${USER}/:id`, UserController.update);
 router.delete(`${USER}/:id`, UserController.delete);
+router.delete(`${USER_REMOVE}/:id`, UserController.userRemove);
 
 router.post(LOGIN, LoginController.login);
 router.get(PERMISSION, validateToken, LoginController.getPermission);

@@ -1,4 +1,5 @@
 import PostModel from '../models/PostModel.js';
+import UserModel from '../models/UserModel.js';
 
 class UserPostsService {
   async getUserPosts(userId) {
@@ -7,6 +8,10 @@ class UserPostsService {
     }
     if (userId.length !== 24) {
       throw new Error('Wrong user ID format!');
+    }
+    const user = await UserModel.findById(userId);
+    if (user.name === 'User deleted') {
+      return [];
     }
     const posts = await PostModel.find();
     const userPosts = posts.filter((post) => post.userId === userId);

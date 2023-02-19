@@ -49,6 +49,15 @@ class UserController {
       res.status(500).send(`${err.name}: ${err.message}`);
     }
   }
+
+  async userRemove(req, res) {
+    try {
+      await UserService.userRemove(req.params.id);
+      res.json({ message: 'your profile deleted!' });
+    } catch (err) {
+      res.status(500).send(`${err.name}: ${err.message}`);
+    }
+  }
 }
 
 export default new UserController();

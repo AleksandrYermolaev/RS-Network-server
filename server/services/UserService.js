@@ -72,6 +72,29 @@ class UserService {
     const deletedUser = await UserModel.findByIdAndDelete(id);
     return deletedUser;
   }
+
+  async userRemove(id) {
+    if (!id) {
+      throw new Error('User ID is required param: /users/remove/:id');
+    }
+    if (id.length !== 24) {
+      throw new Error('Wrong user ID format!');
+    }
+    const deletedCandidate = await UserModel.findById(id);
+    if (deletedCandidate) {
+      const deletedUser = {
+        name: 'User deleted',
+        email: '',
+        image: 'http://localhost:8080/deleted_user.jpg',
+        age: 0,
+        location: '',
+        followers: [],
+        password: '',
+        about: '',
+      };
+      await UserModel.findByIdAndUpdate(id, deletedUser);
+    }
+  }
 }
 
 export default new UserService();
