@@ -44,7 +44,7 @@ class UserService {
       name,
       email,
       password: hashedPassword,
-      followers: ['63e90bdc2c47e03ec8c03233'],
+      followers: ['63fb32a0923f797a587a09a4'],
     });
     return createdUser;
   }
@@ -85,7 +85,7 @@ class UserService {
       const deletedUser = {
         name: 'User deleted',
         email: '',
-        image: 'http://localhost:8080/deleted_user.jpg',
+        image: 'https://rs-network-production.up.railway.app/deleted_user.jpg',
         age: 0,
         location: '',
         followers: [],
