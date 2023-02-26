@@ -1,6 +1,16 @@
 # RS-Network-server
-Backend for RS-Network project.
+Backend for RS-Network project (*all actual code located in develop branch*).
 
+## About
+Server is is temporarily deployed to [Railway app](https://rs-network-production.up.railway.app/).
+
+If the remote server is not available, you can start it locally by following the instructions below:
+1. Clone this repository.
+2. Get .env file [here](https://drive.google.com/file/d/1uynDL4xHU8_IwAM5CJUuublueECooi3i/view?usp=sharing) and place it to root folder.
+3. Run npm install.
+4. Run npm start.
+
+## Tech stack
 Sever is running on Node.js and Express.
 
 In addition, the main libraries used are:
